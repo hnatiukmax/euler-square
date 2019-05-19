@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">EulerSquare</string>
+    <string name="app_name">Euler Square</string>
+    <string name="logo_name">Euler Square</string>
 </resources>
