@@ -1,9 +1,9 @@
-package com.masterschief.eulersquare.ui;
+package com.masterschief.eulersquare;
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class GameActivity extends Activity {
+public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
