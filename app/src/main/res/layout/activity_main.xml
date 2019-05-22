@@ -10,9 +10,9 @@
     <Button
         android:id="@+id/go"
         style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_width="116dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="56dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Start"
         android:textAlignment="center"
@@ -21,12 +21,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="371dp"
         android:layout_marginBottom="149dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/rdComplexity"
@@ -110,7 +111,7 @@
     <RadioGroup
         android:id="@+id/rdComplexity"
         android:layout_width="wrap_content"
-        android:layout_height="145dp"
+        android:layout_height="168dp"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="140dp"
@@ -118,6 +119,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/rdSize"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
@@ -152,5 +154,18 @@
             android:textStyle="bold" />
 
     </RadioGroup>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_height="137dp"
+        android:layout_width="0dp"
+        android:layout_marginTop="21dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/back_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdComplexity" />
+
 
 </android.support.constraint.ConstraintLayout>

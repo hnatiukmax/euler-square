@@ -1,9 +1,10 @@
 package com.masterschief.eulersquare.logic;
 
 public enum Level {
-    EASY(1),
-    MEDIUM(2),
-    HARD(3);
+    //percent of full desk
+    EASY(75),
+    MEDIUM(50),
+    HARD(25);
 
     private int comp;
 
@@ -14,4 +15,5 @@ public enum Level {
     public int getComplexity() {
         return comp;
     }
+
 }

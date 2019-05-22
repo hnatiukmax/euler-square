@@ -21,4 +21,15 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/back_new" />
 
+    <com.masterschief.eulersquare.ui.Desk
+        android:id="@+id/viewDesk"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

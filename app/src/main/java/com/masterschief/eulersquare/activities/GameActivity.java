@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.masterschief.eulersquare.R;
+import com.masterschief.eulersquare.controller.GameController;
+import com.masterschief.eulersquare.logic.LSquare;
 import com.masterschief.eulersquare.logic.Level;
 import com.masterschief.eulersquare.logic.Mode;
 import com.masterschief.eulersquare.logic.Pair;
@@ -19,5 +21,8 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Mode mode = (Mode) (intent.getSerializableExtra("mode"));
+
+        GameController controller = new GameController(findViewById(R.id.viewDesk), mode);
+        controller.start();
     }
 }

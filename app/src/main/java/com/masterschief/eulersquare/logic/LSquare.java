@@ -7,6 +7,10 @@ public class LSquare {
     private int n;
     private Pair[][] eulerSquare;
 
+    public Pair[][] getEulerSquare() {
+        return eulerSquare;
+    }
+
     public LSquare(int n) {
         this.n = n;
         eulerSquare = new Pair[n][n];
