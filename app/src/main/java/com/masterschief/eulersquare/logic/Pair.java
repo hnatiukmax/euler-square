@@ -1,8 +1,9 @@
 package com.masterschief.eulersquare.logic;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Pair {
+public class Pair implements Serializable {
     public int first;
     public int second;
 
