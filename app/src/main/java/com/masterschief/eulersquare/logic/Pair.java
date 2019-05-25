@@ -20,4 +20,12 @@ public class Pair implements Serializable {
         return first == pair.first &&
                 second == pair.second;
     }
+
+    @Override
+    public String toString() {
+        return "(" +
+                + first +
+                ", " + second +
+                ")";
+    }
 }

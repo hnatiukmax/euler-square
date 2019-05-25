@@ -1,24 +1,33 @@
 package com.masterschief.eulersquare.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.masterschief.eulersquare.R;
-import com.masterschief.eulersquare.logic.Level;
-import com.masterschief.eulersquare.logic.Mode;
+import com.masterschief.eulersquare.controller.GameController;
 import com.masterschief.eulersquare.logic.Pair;
-import com.masterschief.eulersquare.logic.Size;
+
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Logger;
 
 public class Desk extends View {
+    private Logger log = Logger.getLogger(Desk.class.getName());
+
     private Pair[][] desk;
     private int backRes;
     private Pair currentCell;
+    private int size;
 
     public Desk(Context context) {
         super(context);
@@ -33,7 +42,12 @@ public class Desk extends View {
 
     }
 
+    public void setCurrentCell(Pair currentCell) {
+        this.currentCell = currentCell;
+    }
+
     public void setParameters(Pair[][] desk, int size) {
+        this.size = size;
         this.desk = desk;
 
         switch (size) {
@@ -49,27 +63,49 @@ public class Desk extends View {
         }
     }
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint p = new Paint();
+
         super.onDraw(canvas);
 
         setBackgroundResource(backRes);
 
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.logo2);
-        b.createScaledBitmap(b, 100, 100, false);
-        canvas.drawBitmap(b.createScaledBitmap(b, 100, 100, false),
-                (getWidth() / 3) + 5, 50, p);
+        drawCurrentCell(canvas);
+        //drawCurrentSquare();
 
-        //drawDesk(canvas);
+
+//        Bitmap a = BitmapFactory.decodeResource(getResources(), R.drawable.button1);
+//        canvas.drawBitmap(a.createScaledBitmap(b, 100, 100, false),
+//                (getWidth() / 3) + 5, 50, new Paint());
+
     }
 
-    protected void drawDesk(Canvas cv) {
+    protected void drawCurrentCell(Canvas cv) {
+        Paint p = new Paint();
+        p.setColor(0x7581F3F3);
+        p.setStrokeWidth(2);
+
         if (currentCell != null) {
-            //fill cell someth color
+
+            float range = cv.getWidth() / size;
+            float left = currentCell.first * range + 5;
+            float top = currentCell.second * range + 5;
+            float right = left + range - 5;
+            float bottom = top + range - 5;
+
+            log.info("DrawCell |");
+
+            cv.drawRect(left, top, right, bottom, p);
         }
+    }
 
+    class BitMapGenerate extends AsyncTask<> {
 
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            return null;
+        }
     }
 }
 

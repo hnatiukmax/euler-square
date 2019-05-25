@@ -3,26 +3,82 @@ package com.masterschief.eulersquare.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.masterschief.eulersquare.R;
 import com.masterschief.eulersquare.controller.GameController;
-import com.masterschief.eulersquare.logic.LSquare;
-import com.masterschief.eulersquare.logic.Level;
 import com.masterschief.eulersquare.logic.Mode;
-import com.masterschief.eulersquare.logic.Pair;
-import com.masterschief.eulersquare.logic.Size;
+
+import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
+    private ArrayList<ImageView> buttonAlp;
+    private ArrayList<ImageView> buttonNum;
+    private ImageView hint;
+    private ImageView back;
+    private ImageView settings;
+
+    private View.OnClickListener listener_back = (View v) -> {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.blink);
+        v.startAnimation(anim);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    };
+
+    private View.OnClickListener listener = (View v) -> {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        v.startAnimation(anim);
+    };
+
+    private View.OnClickListener listener1 = (View v) -> {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        v.startAnimation(anim);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //get info about game
         Intent intent = getIntent();
         Mode mode = (Mode) (intent.getSerializableExtra("mode"));
 
-        GameController controller = new GameController(findViewById(R.id.viewDesk), mode);
+        buttonAlp = new ArrayList<>(5);
+        buttonNum = new ArrayList<>(5);
+
+        buttonAlp.add(findViewById(R.id.buttonA));
+        buttonAlp.add(findViewById(R.id.buttonB));
+        buttonAlp.add(findViewById(R.id.buttonC));
+        buttonAlp.add(findViewById(R.id.buttonD));
+        buttonAlp.add(findViewById(R.id.buttonE));
+
+        buttonNum.add(findViewById(R.id.button1));
+        buttonNum.add(findViewById(R.id.button2));
+        buttonNum.add(findViewById(R.id.button3));
+        buttonNum.add(findViewById(R.id.button4));
+        buttonNum.add(findViewById(R.id.button5));
+
+        hint = findViewById(R.id.btn_hint);
+
+        back = findViewById(R.id.btn_back);
+        back.setOnClickListener(listener_back);
+
+        settings = findViewById(R.id.btn_settigns);
+
+        hint.setOnClickListener(listener);
+        settings.setOnClickListener(listener1);
+
+        for (int i = 4; i > mode.size.getSize() - 1; i--) {
+            buttonAlp.get(i).setVisibility(View.INVISIBLE);
+            buttonNum.get(i).setVisibility(View.INVISIBLE);
+        }
+
+        //start game
+        GameController controller = new GameController(this, buttonAlp, buttonNum, hint, findViewById(R.id.viewDesk), mode);
         controller.start();
     }
 }
