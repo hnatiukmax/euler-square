@@ -160,7 +160,16 @@ public class GameController {
         } else {
             countCell++;
             gameDesk[currentCell.first][currentCell.second].second =
-                    sourceDesk.getEulerSquare()[currentCell.first][currentCell.second].first;
+                    sourceDesk.getEulerSquare()[currentCell.first][currentCell.second].second;
+        }
+        if (countCell == size*size*2) {
+            log.info("CHECK WIN");
+            if (checkWin()) {
+                log.info("WIN WIN WIN");
+                viewDesk.setOnClickListener(null);
+                viewDesk.setWin(true);
+                viewDesk.invalidate();
+            }
         }
         viewDesk.invalidate();
         //viewDesk.setMove();
@@ -200,6 +209,7 @@ public class GameController {
     };
 
     private View.OnClickListener listener_restart = (View v) -> {
+        printPairs(sourceDesk.getEulerSquare());
         if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
             return;
         }
