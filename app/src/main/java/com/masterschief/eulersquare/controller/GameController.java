@@ -1,6 +1,7 @@
 package com.masterschief.eulersquare.controller;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.media.Image;
 import android.os.SystemClock;
 import android.view.Gravity;
@@ -103,7 +104,7 @@ public class GameController {
 
         if (currentCell == null) {
             Toast toast = Toast.makeText(context,
-                    "Не выбрана клетка!",
+                    "Не выбрана ячейка!",
                     Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 25);
             toast.show();
@@ -115,9 +116,12 @@ public class GameController {
         boolean position = buttonA.contains(v);
         //log.info("listener choice (" + choice + "," + position + ")");
         if (isCorrect(choice, position)) {
+
             if (position) {
+                if (gameDesk[currentCell.first][currentCell.second].first != 0) countCell--;
                 gameDesk[currentCell.first][currentCell.second].first = choice;
             } else {
+                if (gameDesk[currentCell.first][currentCell.second].second != 0) countCell--;
                 gameDesk[currentCell.first][currentCell.second].second = choice;
             }
             countCell++;
@@ -125,11 +129,15 @@ public class GameController {
                 log.info("CHECK WIN");
                 if (checkWin()) {
                     log.info("WIN WIN WIN");
+                    viewDesk.setOnClickListener(null);
+                    viewDesk.setWin(true);
+                    viewDesk.invalidate();
                 }
             }
 
             //printPairs(gameDesk);
             viewDesk.invalidate();
+            log.info("CountCell is " + countCell);
         }
     };
 
@@ -137,6 +145,24 @@ public class GameController {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
 
+        if (gameDesk[currentCell.first][currentCell.second].first != 0 &&
+                gameDesk[currentCell.first][currentCell.second].second != 0) {
+            Toast toast = Toast.makeText(context,
+                    "Ячейка заполнена!",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 25);
+            toast.show();
+            return;
+        } else if (gameDesk[currentCell.first][currentCell.second].first == 0) {
+            countCell++;
+            gameDesk[currentCell.first][currentCell.second].first =
+                    sourceDesk.getEulerSquare()[currentCell.first][currentCell.second].first;
+        } else {
+            countCell++;
+            gameDesk[currentCell.first][currentCell.second].second =
+                    sourceDesk.getEulerSquare()[currentCell.first][currentCell.second].first;
+        }
+        viewDesk.invalidate();
         //viewDesk.setMove();
     };
 
@@ -149,21 +175,28 @@ public class GameController {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
 
-        sourceDesk = new LSquare(size);
-        prepareDesk(sourceDesk.getEulerSquare());
+        updateCountCell();
 
-        copyGameDesk = new Pair[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                copyGameDesk[i][j] = new Pair(
-                        gameDesk[i][j].first,
-                        gameDesk[i][j].second
-                );
-            }
+        if (viewDesk.isWin()) {
+            viewDesk.setWin(false);
         }
 
-        viewDesk.setParameters(gameDesk, size);
-        viewDesk.invalidate();
+            sourceDesk = new LSquare(size);
+            prepareDesk(sourceDesk.getEulerSquare());
+
+            copyGameDesk = new Pair[size][size];
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    copyGameDesk[i][j] = new Pair(
+                            gameDesk[i][j].first,
+                            gameDesk[i][j].second
+                    );
+                }
+            }
+
+            viewDesk.setParameters(gameDesk, size);
+            viewDesk.invalidate();
+
     };
 
     private View.OnClickListener listener_restart = (View v) -> {
@@ -174,6 +207,13 @@ public class GameController {
 
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
+
+        updateCountCell();
+
+        if (viewDesk.isWin()) {
+            viewDesk.setWin(false);
+//            viewDesk.invalidate();
+        }
 
         gameDesk = new Pair[size][size];
         for (int i = 0; i < size; i++) {
@@ -188,6 +228,11 @@ public class GameController {
         viewDesk.setParameters(gameDesk, size);
         viewDesk.invalidate();
     };
+
+    private void updateCountCell() {
+        countCell = (int) (((double) mode.level.getComplexity() / 100) * Math.pow(size, 2));
+        countCell += countCell/2;
+    }
 
     private void printPairs(Pair[][] desk) {
         String str = "";
@@ -217,6 +262,7 @@ public class GameController {
 
         countCell = (int) (((double) mode.level.getComplexity() / 100) * Math.pow(size, 2));
         countCell += countCell/2;
+
 
         sourceDesk = new LSquare(size);
         prepareDesk(sourceDesk.getEulerSquare());
@@ -261,7 +307,7 @@ public class GameController {
             } else if (gameDesk[i][j].second == 0) {
                 gameDesk[i][j].second = fullDesk[i][j].second;
             } else {
-                countCell++;
+                k--;
             }
         }
     }

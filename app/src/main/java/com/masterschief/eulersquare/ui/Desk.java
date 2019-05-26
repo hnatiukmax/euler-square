@@ -27,8 +27,18 @@ public class Desk extends View {
 
     private Pair[][] desk;
     private int backRes;
+    private int winBackRes;
     private Pair currentCell;
     private int size;
+    private boolean isWin = false;
+
+    public void setWin(boolean isWin) {
+        this.isWin = isWin;
+    }
+
+    public boolean isWin() {
+        return isWin;
+    }
 
     public Desk(Context context) {
         super(context);
@@ -54,12 +64,15 @@ public class Desk extends View {
         switch (size) {
             case 3:
                 backRes = R.drawable.x3image;
+                winBackRes = R.drawable.x3imageblur;
                 break;
             case 4:
                 backRes = R.drawable.x4image;
+                winBackRes = R.drawable.x4imageblur;
                 break;
             case 5:
                 backRes = R.drawable.x5image;
+                winBackRes = R.drawable.x5imageblur;
                 break;
         }
     }
@@ -67,10 +80,14 @@ public class Desk extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        setBackgroundResource(backRes);
+        if (isWin) {
+            setBackgroundResource(winBackRes);
+        } else {
+            setBackgroundResource(backRes);
 
-        drawCurrentCell(canvas);
-        drawCurrentSquare(canvas);
+            drawCurrentCell(canvas);
+            drawCurrentSquare(canvas);
+        }
     }
 
     protected void drawCurrentSquare(Canvas cv) {
@@ -106,7 +123,7 @@ public class Desk extends View {
 
     protected void drawCurrentCell(Canvas cv) {
         Paint pCell = new Paint();
-        pCell.setColor(0x27E23737);
+        pCell.setColor(0x3C1DC9EC);
 
         Paint pFriend = new Paint();
         pFriend.setColor(0x3251C5C5);
@@ -118,17 +135,17 @@ public class Desk extends View {
 
             range = cv.getWidth() / size;
 
-            top = currentCell.first * range + 4;
-            bottom = top + range - 4;
-            left = currentCell.second * range + 4;
-            right = left + range - 4;
+            top = currentCell.first * range ;
+            bottom = top + range ;
+            left = currentCell.second * range ;
+            right = left + range ;
 
             for (int i = 0; i < size; i++) {
-                cv.drawRect(i * range + 5,top, range*(i+1), bottom, pFriend);
-                cv.drawRect(left, i * range + 5, right, range*(i+1), pFriend);
+                cv.drawRect(i * range ,top, range*(i+1), bottom, pFriend);
+                cv.drawRect(left, i * range , right, range*(i+1), pFriend);
             }
 
-            cv.drawRect(left, top, right, bottom, pFriend);
+            cv.drawRect(left, top, right, bottom, pCell);
 
         } else {
             log.info("current Cell is null ");

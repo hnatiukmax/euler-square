@@ -32,15 +32,15 @@ public class GameActivity extends AppCompatActivity {
                 anim = AnimationUtils.loadAnimation(this, R.anim.blink);
                 v.startAnimation(anim);
                 intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_settigns:
                 anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
                 v.startAnimation(anim);
-                //intent = new Intent(this, MainActivity.class);
+                //intent = new Intent(this, Settings.class);
+                //startActivity(intent);
                 break;
         }
-
-        startActivity(intent);
     };
 
     @Override
@@ -80,6 +80,7 @@ public class GameActivity extends AppCompatActivity {
             buttonAlp.get(i).setVisibility(View.INVISIBLE);
             buttonNum.get(i).setVisibility(View.INVISIBLE);
         }
+
 
         //start game
         GameController controller = new GameController(this, buttonAlp, buttonNum, hint, restart, newGame, findViewById(R.id.viewDesk), mode);
