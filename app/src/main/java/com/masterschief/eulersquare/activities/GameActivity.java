@@ -20,6 +20,8 @@ public class GameActivity extends AppCompatActivity {
     private ImageView hint;
     private ImageView back;
     private ImageView settings;
+    private ImageView restart;
+    private ImageView newGame;
 
     private View.OnClickListener listener_navigation = (View v) -> {
         Animation anim;
@@ -68,6 +70,8 @@ public class GameActivity extends AppCompatActivity {
         hint = findViewById(R.id.btn_hint);
         back = findViewById(R.id.btn_back);
         settings = findViewById(R.id.btn_settigns);
+        restart = findViewById(R.id.btn_restart);
+        newGame = findViewById(R.id.btn_newgame);
 
         settings.setOnClickListener(listener_navigation);
         back.setOnClickListener(listener_navigation);
@@ -78,7 +82,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         //start game
-        GameController controller = new GameController(this, buttonAlp, buttonNum, hint, findViewById(R.id.viewDesk), mode);
+        GameController controller = new GameController(this, buttonAlp, buttonNum, hint, restart, newGame, findViewById(R.id.viewDesk), mode);
         controller.start();
     }
 }

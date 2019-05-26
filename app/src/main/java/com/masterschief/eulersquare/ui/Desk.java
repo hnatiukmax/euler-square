@@ -43,14 +43,6 @@ public class Desk extends View {
 
     }
 
-    public void setMove(int choice, boolean position) {
-        if (position) {
-            desk[currentCell.first][currentCell.second].first = choice;
-        } else {
-            desk[currentCell.first][currentCell.second].second = choice;
-        }
-    }
-
     public void setCurrentCell(Pair currentCell) {
         this.currentCell = currentCell;
     }
@@ -73,42 +65,12 @@ public class Desk extends View {
     }
 
     protected void onDraw(Canvas canvas) {
-
         super.onDraw(canvas);
 
         setBackgroundResource(backRes);
+
         drawCurrentCell(canvas);
-        //drawCurrentSquare(canvas);
-
-//        int wh = (int) (canvas.getWidth() / size / 2.0);
-//        int range = (int) (canvas.getWidth() / size);
-////
-//        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        p.setTextSize(wh );
-//        p.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-//        //p.setStyle(Paint.Style.STROKE);
-//
-//        canvas.drawText("B", (float) (range / 7.0), (float) (range / 3) * 2, p);
-//        canvas.drawText("2", (float) (range / 5.0) + p.measureText("B"), (float) (range / 3) * 2, p);
-//        log.info("cv w = " +canvas.getWidth() + " " +(float) canvas.getWidth() / size + " x = " + (float) (range / 6.0) + " y = " + (float) (range / 3.0));
-
-
-
-//        canvas.drawBitmap(
-//                Bitmap
-//                        .createScaledBitmap(
-//                                getBitMap(2, true), wh, wh, false),
-//                (int) (range / 6),
-//                (int) (range / 3),
-//                new Paint()
-//        );
-//
-
-//
-//        Bitmap a = BitmapFactory.decodeResource(getResources(), R.drawable.button1);
-//        canvas.drawBitmap(Bitmap.createScaledBitmap(a, 100, 100, false),
-//                (getWidth() / 3) + 5, 50, new Paint());
-
+        drawCurrentSquare(canvas);
     }
 
     protected void drawCurrentSquare(Canvas cv) {
@@ -120,21 +82,21 @@ public class Desk extends View {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                log.info("trouble");
                 if (desk[i][j].first != 0) {
-                    //log.info("char is " + (desk[i][j].first + 16) + " " + (char) 65) ;
+                    log.info("First | " + i + "," + j + " | " + desk[i][j].first);
                     cv.drawText(
                             Character.toString((char) (desk[i][j].first + 64)),
-                            (float) (range / 7.0) + (range * i),
-                            (float) (range / 3) * 2 + (range * i),
+                            (float) ((range / 7.0) + (range * j)),
+                            (float) ((range / 3) * 2 + (range * i)),
                             fontPaint
                     );
                 }
                 if (desk[i][j].second != 0) {
+                    log.info("Second | " + i + "," + j + " | " + desk[i][j].second);
                     cv.drawText(
                             Integer.toString(desk[i][j].second),
-                            (float) (range / 5.0) + fontPaint.measureText("B") + (range * i),
-                            (float) (range / 3) * 2 + (range * i),
+                            (float) ((range / 5.0) + fontPaint.measureText("B") + (range * j)),
+                            (float) ((range / 3) * 2 + (range * i)),
                             fontPaint
                     );
                 }
@@ -156,9 +118,9 @@ public class Desk extends View {
 
             range = cv.getWidth() / size;
 
-            top = currentCell.second * range + 4;
+            top = currentCell.first * range + 4;
             bottom = top + range - 4;
-            left = currentCell.first * range + 4;
+            left = currentCell.second * range + 4;
             right = left + range - 4;
 
             for (int i = 0; i < size; i++) {

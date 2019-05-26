@@ -4,7 +4,7 @@ public enum Level {
     //percent of full desk
     EASY(75),
     MEDIUM(50),
-    HARD(25);
+    HARD(35);
 
     private int comp;
 
