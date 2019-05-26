@@ -21,21 +21,24 @@ public class GameActivity extends AppCompatActivity {
     private ImageView back;
     private ImageView settings;
 
-    private View.OnClickListener listener_back = (View v) -> {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.blink);
-        v.startAnimation(anim);
-        Intent intent = new Intent(this, MainActivity.class);
+    private View.OnClickListener listener_navigation = (View v) -> {
+        Animation anim;
+        Intent intent = null;
+
+        switch (v.getId()) {
+            case R.id.btn_back:
+                anim = AnimationUtils.loadAnimation(this, R.anim.blink);
+                v.startAnimation(anim);
+                intent = new Intent(this, MainActivity.class);
+                break;
+            case R.id.btn_settigns:
+                anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+                v.startAnimation(anim);
+                //intent = new Intent(this, MainActivity.class);
+                break;
+        }
+
         startActivity(intent);
-    };
-
-    private View.OnClickListener listener = (View v) -> {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.fadein);
-        v.startAnimation(anim);
-    };
-
-    private View.OnClickListener listener1 = (View v) -> {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        v.startAnimation(anim);
     };
 
     @Override
@@ -63,14 +66,11 @@ public class GameActivity extends AppCompatActivity {
         buttonNum.add(findViewById(R.id.button5));
 
         hint = findViewById(R.id.btn_hint);
-
         back = findViewById(R.id.btn_back);
-        back.setOnClickListener(listener_back);
-
         settings = findViewById(R.id.btn_settigns);
 
-        hint.setOnClickListener(listener);
-        settings.setOnClickListener(listener1);
+        settings.setOnClickListener(listener_navigation);
+        back.setOnClickListener(listener_navigation);
 
         for (int i = 4; i > mode.size.getSize() - 1; i--) {
             buttonAlp.get(i).setVisibility(View.INVISIBLE);

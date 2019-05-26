@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.masterschief.eulersquare.R;
 import com.masterschief.eulersquare.logic.LSquare;
 import com.masterschief.eulersquare.logic.Mode;
 import com.masterschief.eulersquare.logic.Pair;
@@ -38,21 +39,37 @@ public class GameController {
     private Pair currentCell;
 
     private View.OnTouchListener listener_desk = (View view, MotionEvent event) -> {
-//        if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
-//            return false;
-//        }
-//        mLastClickTime = SystemClock.elapsedRealtime();
+        if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
+            return false;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
 
-        currentCell = new Pair(
+        Pair tmp = new Pair(
                 (int) (event.getX() / (view.getWidth() / size)),
                 (int) (event.getY() / (view.getWidth() / size))
         );
+
+        if (tmp.equals(currentCell)) {
+            currentCell = null;
+        } else {
+            currentCell = tmp;
+        }
 
         viewDesk.setCurrentCell(currentCell);
         viewDesk.invalidate();
 
         log.info("point : " + currentCell);
         return true;
+    };
+
+    private View.OnClickListener listener_choice = (View v) -> {
+          int choice = buttonA.indexOf(v) == -1 ? buttonN.indexOf(v) : buttonA.indexOf(v);
+          choice++;
+          boolean position = buttonA.contains(v);
+          if (isCorrect(choice, position)) {
+                viewDesk.setMove(choice, position);
+                viewDesk.invalidate();
+          }
     };
 
     public GameController(Context context, ArrayList<ImageView> buttonA, ArrayList<ImageView> buttonN,
@@ -85,9 +102,11 @@ public class GameController {
         size = mode.size.getSize();
         sourceDesk = new LSquare(size);
 
+
         prepareDesk(sourceDesk.getEulerSquare());
 
         viewDesk.setParameters(gameDesk, size);
+        printPairs();
 
         printPairs();
     }
@@ -121,19 +140,15 @@ public class GameController {
         }
     }
 
-    private boolean isCorrect(Pair point, int value, boolean position) {
-        if (gameDesk[point.first][point.second].first != 0 && gameDesk[point.first][point.second].second != 0) {
-            return false;
-        }
-
+    private boolean isCorrect(int value, boolean position) {
         if (position) {
             for (int i = 0; i < size; i++) {
-                if (gameDesk[point.first][i].first == value || gameDesk[i][point.second].first == value)
+                if (gameDesk[currentCell.first][i].first == value || gameDesk[i][currentCell.second].first == value)
                     return false;
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (gameDesk[point.first][i].second == value || gameDesk[i][point.second].second == value)
+                if (gameDesk[currentCell.first][i].second == value || gameDesk[i][currentCell.second].second == value)
                     return false;
             }
         }

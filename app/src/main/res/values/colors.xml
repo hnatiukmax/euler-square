@@ -5,4 +5,5 @@
     <color name="colorAccent">#36AF91</color>
     <color name="colorLogo">#4A7469</color>
     <color name="btnStartColor">#008464</color>
+    <color name="cell">#3251C5C5</color>
 </resources>
