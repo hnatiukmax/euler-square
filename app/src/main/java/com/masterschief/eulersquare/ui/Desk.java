@@ -28,9 +28,19 @@ public class Desk extends View {
     private Pair[][] desk;
     private int backRes;
     private int winBackRes;
+    private int pauseBackRes;
     private Pair currentCell;
     private int size;
     private boolean isWin = false;
+    private boolean isPause = false;
+
+    public void setPause(boolean pause) {
+        isPause = pause;
+    }
+
+    public boolean isPause() {
+        return isPause;
+    }
 
     public void setWin(boolean isWin) {
         this.isWin = isWin;
@@ -65,14 +75,17 @@ public class Desk extends View {
             case 3:
                 backRes = R.drawable.x3image;
                 winBackRes = R.drawable.x3imageblur;
+                pauseBackRes = R.drawable.x3imagestop;
                 break;
             case 4:
                 backRes = R.drawable.x4image;
                 winBackRes = R.drawable.x4imageblur;
+                pauseBackRes = R.drawable.x4imagestop;
                 break;
             case 5:
                 backRes = R.drawable.x5image;
                 winBackRes = R.drawable.x5imageblur;
+                pauseBackRes = R.drawable.x5imagestop;
                 break;
         }
     }
@@ -82,6 +95,8 @@ public class Desk extends View {
 
         if (isWin) {
             setBackgroundResource(winBackRes);
+        } else if (isPause) {
+            setBackgroundResource(pauseBackRes);
         } else {
             setBackgroundResource(backRes);
 

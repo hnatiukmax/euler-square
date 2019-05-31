@@ -45,7 +45,7 @@ public class LSquare {
 
         fillLSquare(k1,k2);
         mix();
-        //printPairs();
+        printPairs();
     }
 
 
@@ -63,9 +63,11 @@ public class LSquare {
             permI(r1,r2);
             permJ(r3 , r4);
 
-            printPairs();
+            //printPairs();
         }
         if (Math.random() < 0.5) transp();
+        printPairs();
+
     }
 
     private void permI(int f, int s) {

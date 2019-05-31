@@ -190,7 +190,7 @@
 
     <ImageView
         android:id="@+id/img_time"
-        android:layout_width="88dp"
+        android:layout_width="75dp"
         android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -229,5 +229,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/restart" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="88dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_time" />
+
+    <ImageView
+        android:id="@+id/btn_pause"
+        android:layout_width="36dp"
+        android:layout_height="37dp"
+        app:layout_constraintStart_toEndOf="@+id/chronometer"
+        app:layout_constraintTop_toTopOf="@+id/chronometer"
+        app:srcCompat="@drawable/pause" />
 
 </android.support.constraint.ConstraintLayout>

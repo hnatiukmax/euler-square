@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class GameController {
     private ImageView hint;
     private ImageView restart;
     private ImageView newGame;
+    private ImageView pause;
     private Desk viewDesk;
     private Mode mode;
 
@@ -47,8 +49,11 @@ public class GameController {
     private Pair currentCell;
     private int countCell;
 
-    public GameController(Context context, ArrayList<ImageView> buttonA, ArrayList<ImageView> buttonN,
-                          ImageView hint, ImageView restart, ImageView newGame,  Desk viewDesk, Mode mode) {
+    private Chronometer chronometer;
+    private long lastPause;
+
+    public GameController(Context context, Chronometer chronometer, ArrayList<ImageView> buttonA, ArrayList<ImageView> buttonN,
+                          ImageView hint, ImageView restart, ImageView pause, ImageView newGame,  Desk viewDesk, Mode mode) {
         this.viewDesk = viewDesk;
         this.mode = mode;
 
@@ -58,6 +63,8 @@ public class GameController {
         this.hint = hint;
         this.restart = restart;
         this.newGame = newGame;
+        this.pause = pause;
+        this.chronometer = chronometer;
     }
 
     /*
@@ -74,6 +81,14 @@ public class GameController {
             return false;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
+
+        if (viewDesk.isPause()) {
+            viewDesk.setPause(false);
+            chronometer.setBase(chronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+            chronometer.start();
+            viewDesk.invalidate();
+            return true;
+        }
 
         Pair tmp = new Pair(
                 (int) (event.getY() / (view.getWidth() / size)),
@@ -138,12 +153,27 @@ public class GameController {
             //printPairs(gameDesk);
             viewDesk.invalidate();
             log.info("CountCell is " + countCell);
+        } else {
+            Toast toast = Toast.makeText(context,
+                    "Неккоректный ход!",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 25);
+            toast.show();
         }
     };
 
     private View.OnClickListener listener_hint = (View v) -> {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
+
+        if (currentCell == null) {
+            Toast toast = Toast.makeText(context,
+                    "Не выбрана ячейка!",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 25);
+            toast.show();
+            return;
+        }
 
         if (gameDesk[currentCell.first][currentCell.second].first != 0 &&
                 gameDesk[currentCell.first][currentCell.second].second != 0) {
@@ -184,11 +214,15 @@ public class GameController {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
 
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
         updateCountCell();
 
         if (viewDesk.isWin()) {
             viewDesk.setWin(false);
         }
+
+        viewDesk.setPause(false);
 
             sourceDesk = new LSquare(size);
             prepareDesk(sourceDesk.getEulerSquare());
@@ -209,7 +243,7 @@ public class GameController {
     };
 
     private View.OnClickListener listener_restart = (View v) -> {
-        printPairs(sourceDesk.getEulerSquare());
+        //printPairs(sourceDesk.getEulerSquare());
         if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
             return;
         }
@@ -222,7 +256,6 @@ public class GameController {
 
         if (viewDesk.isWin()) {
             viewDesk.setWin(false);
-//            viewDesk.invalidate();
         }
 
         gameDesk = new Pair[size][size];
@@ -236,6 +269,23 @@ public class GameController {
         }
 
         viewDesk.setParameters(gameDesk, size);
+        viewDesk.invalidate();
+    };
+
+    private View.OnClickListener listener_pause = (View v) -> {
+        printPairs(sourceDesk.getEulerSquare());
+        if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
+        v.startAnimation(animation);
+
+        lastPause = SystemClock.elapsedRealtime();
+        chronometer.stop();
+
+        viewDesk.setPause(true);
         viewDesk.invalidate();
     };
 
@@ -262,6 +312,7 @@ public class GameController {
         viewDesk.setOnTouchListener(listener_desk);
         restart.setOnClickListener(listener_restart);
         newGame.setOnClickListener(listener_newGame);
+        pause.setOnClickListener(listener_pause);
 
         for (int i = 0; i < buttonA.size(); i++) {
             buttonA.get(i).setOnClickListener(listener_choice);
@@ -289,6 +340,9 @@ public class GameController {
                 );
             }
         }
+
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
 
         viewDesk.setParameters(gameDesk, size);
     }
@@ -323,6 +377,24 @@ public class GameController {
     }
 
     private boolean isCorrect(int value, boolean position) {
+        ArrayList<Pair> list = new ArrayList(size*size);
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (gameDesk[i][j].first != 0 && gameDesk[i][j].second != 0 )
+                    list.add(gameDesk[i][j]);
+            }
+        }
+
+        Pair compare = new Pair(
+            position ? value : gameDesk[currentCell.first][currentCell.second].first,
+            position ? gameDesk[currentCell.first][currentCell.second].second : value
+        );
+
+        if (list.contains(compare)) {
+            return false;
+        }
+
         if (position) {
             for (int i = 0; i < size; i++) {
                 if (gameDesk[currentCell.first][i].first == value || gameDesk[i][currentCell.second].first == value) {

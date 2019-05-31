@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 
 import com.masterschief.eulersquare.R;
@@ -22,6 +23,8 @@ public class GameActivity extends AppCompatActivity {
     private ImageView settings;
     private ImageView restart;
     private ImageView newGame;
+    private ImageView pause;
+    private Chronometer chronometer;
 
     private View.OnClickListener listener_navigation = (View v) -> {
         Animation anim;
@@ -72,6 +75,8 @@ public class GameActivity extends AppCompatActivity {
         settings = findViewById(R.id.btn_settigns);
         restart = findViewById(R.id.btn_restart);
         newGame = findViewById(R.id.btn_newgame);
+        pause = findViewById(R.id.btn_pause);
+        chronometer = findViewById(R.id.chronometer);
 
         settings.setOnClickListener(listener_navigation);
         back.setOnClickListener(listener_navigation);
@@ -83,7 +88,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         //start game
-        GameController controller = new GameController(this, buttonAlp, buttonNum, hint, restart, newGame, findViewById(R.id.viewDesk), mode);
+        GameController controller = new GameController(this, chronometer, buttonAlp, buttonNum, hint, restart, pause, newGame, findViewById(R.id.viewDesk), mode);
         controller.start();
     }
 }
