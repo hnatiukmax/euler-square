@@ -18,6 +18,7 @@ import com.masterschief.eulersquare.logic.LSquare;
 import com.masterschief.eulersquare.logic.Mode;
 import com.masterschief.eulersquare.logic.Pair;
 import com.masterschief.eulersquare.ui.Desk;
+import com.masterschief.eulersquare.ui.MediaEffect;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -109,6 +110,7 @@ public class GameController {
     };
 
     private View.OnClickListener listener_choice = (View v) -> {
+        MediaEffect.getInstance().mPlay(context, MediaEffect.click);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
 
@@ -118,11 +120,7 @@ public class GameController {
         mLastClickTime = SystemClock.elapsedRealtime();
 
         if (currentCell == null) {
-            Toast toast = Toast.makeText(context,
-                    "Не выбрана ячейка!",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 25);
-            toast.show();
+            MediaEffect.showToast(context, "Не выбрана ячейка!");
             return;
         }
 
@@ -141,47 +139,35 @@ public class GameController {
             }
             countCell++;
             if (countCell == size*size*2) {
-                log.info("CHECK WIN");
+                //log.info("CHECK WIN");
                 if (checkWin()) {
-                    log.info("WIN WIN WIN");
+                   // log.info("WIN WIN WIN");
                     viewDesk.setOnClickListener(null);
                     viewDesk.setWin(true);
                     viewDesk.invalidate();
                 }
             }
 
-            //printPairs(gameDesk);
             viewDesk.invalidate();
-            log.info("CountCell is " + countCell);
+            //log.info("CountCell is " + countCell);
         } else {
-            Toast toast = Toast.makeText(context,
-                    "Неккоректный ход!",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 25);
-            toast.show();
+            MediaEffect.showToast(context,"Неккоректный ход!");
         }
     };
 
     private View.OnClickListener listener_hint = (View v) -> {
+        MediaEffect.getInstance().mPlay(context, MediaEffect.click);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.blink);
         v.startAnimation(animation);
 
         if (currentCell == null) {
-            Toast toast = Toast.makeText(context,
-                    "Не выбрана ячейка!",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 25);
-            toast.show();
+            MediaEffect.showToast(context, "Не выбрана ячейка!");
             return;
         }
 
         if (gameDesk[currentCell.first][currentCell.second].first != 0 &&
                 gameDesk[currentCell.first][currentCell.second].second != 0) {
-            Toast toast = Toast.makeText(context,
-                    "Ячейка заполнена!",
-                    Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 25);
-            toast.show();
+            MediaEffect.showToast(context, "Ячейка заполнена!");
             return;
         } else if (gameDesk[currentCell.first][currentCell.second].first == 0) {
             countCell++;
@@ -193,9 +179,9 @@ public class GameController {
                     sourceDesk.getEulerSquare()[currentCell.first][currentCell.second].second;
         }
         if (countCell == size*size*2) {
-            log.info("CHECK WIN");
+            //log.info("CHECK WIN");
             if (checkWin()) {
-                log.info("WIN WIN WIN");
+                //log.info("WIN WIN WIN");
                 viewDesk.setOnClickListener(null);
                 viewDesk.setWin(true);
                 viewDesk.invalidate();
@@ -206,6 +192,7 @@ public class GameController {
     };
 
     private View.OnClickListener listener_newGame = (View v) -> {
+        MediaEffect.getInstance().mPlay(context, MediaEffect.click);
         if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
             return;
         }
@@ -243,6 +230,7 @@ public class GameController {
     };
 
     private View.OnClickListener listener_restart = (View v) -> {
+        MediaEffect.getInstance().mPlay(context, MediaEffect.click);
         //printPairs(sourceDesk.getEulerSquare());
         if (SystemClock.elapsedRealtime() - mLastClickTime < CLICK_INTERVAL){
             return;

@@ -12,26 +12,23 @@
         style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
         android:layout_width="116dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Start"
         android:textAlignment="center"
         android:textColor="@color/btnStartColor"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
-        android:layout_height="371dp"
-        android:layout_marginBottom="149dp"
+        android:layout_height="359dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/rdComplexity"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -41,12 +38,11 @@
         android:id="@+id/imageView3"
         android:layout_width="146dp"
         android:layout_height="92dp"
-        android:layout_marginBottom="382dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.985"
         app:srcCompat="@drawable/logo_name" />
 
     <ImageView
@@ -61,16 +57,14 @@
 
     <RadioGroup
         android:id="@+id/rdSize"
-        android:layout_width="235dp"
-        android:layout_height="46dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="10dp"
         android:checkedButton="@+id/x3"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/rdComplexity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
@@ -80,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="3 x 3"
             android:textSize="16sp"
@@ -91,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="4 x 4"
             android:textSize="16sp"
@@ -101,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="5 x 5"
             android:textSize="16sp"
@@ -111,16 +108,13 @@
     <RadioGroup
         android:id="@+id/rdComplexity"
         android:layout_width="wrap_content"
-        android:layout_height="168dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="96dp"
         android:checkedButton="@+id/easy"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/rdSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rdSize"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <RadioButton
@@ -146,7 +140,7 @@
         <RadioButton
             android:id="@+id/hard"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="HARD"
@@ -158,14 +152,13 @@
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="0dp"
-        android:layout_height="137dp"
-        android:layout_marginTop="52dp"
+        android:layout_height="45dp"
         android:scaleType="fitXY"
-        android:src="@drawable/back_bottom"
+        app:srcCompat="@drawable/back_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rdComplexity" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

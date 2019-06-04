@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.masterschief.eulersquare.R;
 import com.masterschief.eulersquare.controller.GameController;
 import com.masterschief.eulersquare.logic.Mode;
+import com.masterschief.eulersquare.ui.MediaEffect;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private Chronometer chronometer;
 
     private View.OnClickListener listener_navigation = (View v) -> {
+        MediaEffect.getInstance().mPlay(this, MediaEffect.click);
         Animation anim;
         Intent intent = null;
 
@@ -40,8 +42,8 @@ public class GameActivity extends AppCompatActivity {
             case R.id.btn_settigns:
                 anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
                 v.startAnimation(anim);
-                //intent = new Intent(this, Settings.class);
-                //startActivity(intent);
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 break;
         }
     };

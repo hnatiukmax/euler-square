@@ -2,8 +2,6 @@ package com.masterschief.eulersquare.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,9 +10,6 @@ import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.masterschief.eulersquare.R;
 import com.masterschief.eulersquare.controller.GameController;
 import com.masterschief.eulersquare.logic.Pair;
@@ -94,7 +89,11 @@ public class Desk extends View {
         super.onDraw(canvas);
 
         if (isWin) {
-            setBackgroundResource(winBackRes);
+            setBackgroundResource(backRes);
+
+            drawCurrentCell(canvas);
+            drawCurrentSquare(canvas);
+            //setBackgroundResource(winBackRes);
         } else if (isPause) {
             setBackgroundResource(pauseBackRes);
         } else {
