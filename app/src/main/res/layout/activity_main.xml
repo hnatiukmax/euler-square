@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/go"
+        android:id="@+id/bntGo"
         style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
         android:layout_width="116dp"
         android:layout_height="57dp"
@@ -16,7 +16,7 @@
         android:text="Start"
         android:textAlignment="center"
         android:textColor="@color/btnStartColor"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,66 +56,17 @@
         app:srcCompat="@drawable/logo2" />
 
     <RadioGroup
-        android:id="@+id/rdSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="10dp"
-        android:checkedButton="@+id/x3"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/rdComplexity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-
-        <RadioButton
-            android:id="@+id/x3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="3 x 3"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-
-        <RadioButton
-            android:id="@+id/x4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="4 x 4"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/x5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="5 x 5"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-    </RadioGroup>
-
-    <RadioGroup
         android:id="@+id/rdComplexity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="96dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="8dp"
         android:checkedButton="@+id/easy"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rdSize"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
         <RadioButton
             android:id="@+id/easy"
@@ -125,7 +76,8 @@
             android:fontFamily="sans-serif-medium"
             android:text="EASY"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="15dp"/>
 
         <RadioButton
             android:id="@+id/medium"
@@ -135,7 +87,8 @@
             android:fontFamily="sans-serif-medium"
             android:text="MEDIUM"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="15dp"/>
 
         <RadioButton
             android:id="@+id/hard"
@@ -145,7 +98,8 @@
             android:fontFamily="sans-serif-medium"
             android:text="HARD"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingRight="15dp"/>
 
     </RadioGroup>
 
@@ -159,6 +113,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/rdSize"
+        android:layout_width="wrap_content"
+        android:layout_height="117dp"
+        android:layout_marginTop="15dp"
+        android:theme="@style/NumberPickerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdComplexity">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="18dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Size :"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/rdSize"
+        app:layout_constraintTop_toBottomOf="@+id/rdComplexity" />
 
 
 </android.support.constraint.ConstraintLayout>

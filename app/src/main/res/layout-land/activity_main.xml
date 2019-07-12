@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.masterschief.eulersquare.ui.SquareLayout
+        android:id="@+id/squareLayout"
+        android:layout_width="419dp"
+
+        android:layout_height="395dp"
+        android:layout_marginEnd="405dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/back_new" />
+
+    </com.masterschief.eulersquare.ui.SquareLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="315dp"
+        android:layout_height="302dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/squareLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo2" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="142dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/squareLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_name" />
+
+    <RadioGroup
+        android:id="@+id/rdComplexity"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
+        android:checkedButton="@+id/easy"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/squareLayout"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        >
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="EASY"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingRight="15dp"/>
+
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="MEDIUM"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingRight="15dp"/>
+
+        <RadioButton
+            android:id="@+id/hard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="HARD"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingRight="15dp"/>
+
+    </RadioGroup>
+
+    <NumberPicker
+        android:id="@+id/rdSize"
+        android:layout_width="wrap_content"
+        android:layout_height="117dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:theme="@style/NumberPickerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/squareLayout"
+        app:layout_constraintTop_toBottomOf="@+id/rdComplexity">
+
+    </NumberPicker>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="18dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Size :"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/rdSize"
+        app:layout_constraintTop_toBottomOf="@+id/rdComplexity" />
+
+    <Button
+        android:id="@+id/bntGo"
+        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+        android:layout_width="116dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Start"
+        android:textAlignment="center"
+        android:textColor="@color/btnStartColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/squareLayout" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

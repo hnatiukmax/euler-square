@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/intro_back"
+        android:id="@+id/kek"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
@@ -16,11 +16,12 @@
         app:srcCompat="@drawable/intro_back" />
 
     <com.masterschief.eulersquare.ui.SquareLayout
-        android:layout_width="match_parent"
-        android:layout_height="438dp"
-        android:layout_marginStart="25dp"
+        android:id="@+id/firstrule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,11 +37,19 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="389dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:text="@string/first_slide"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstrule"
         tools:text="@string/first_slide" />
 
 

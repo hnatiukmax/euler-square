@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="478dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/back_new" />
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/buttonD"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/buttond"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="646dp" />
+
+        <ImageView
+            android:id="@+id/buttonE"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/buttone"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="646dp" />
+
+        <ImageView
+            android:id="@+id/button5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/button5"
+            tools:layout_editor_absoluteX="213dp"
+            tools:layout_editor_absoluteY="646dp" />
+
+        <ImageView
+            android:id="@+id/button4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/button4"
+            tools:layout_editor_absoluteX="273dp"
+            tools:layout_editor_absoluteY="646dp" />
+
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/buttonA"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/buttona"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="714dp" />
+
+        <ImageView
+            android:id="@+id/buttonB"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/buttonb"
+            tools:layout_editor_absoluteX="66dp"
+            tools:layout_editor_absoluteY="714dp" />
+
+
+        <ImageView
+            android:id="@+id/buttonC"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/buttonc"
+            tools:layout_editor_absoluteX="125dp"
+            tools:layout_editor_absoluteY="714dp" />
+
+        <ImageView
+            android:id="@+id/button1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/button1"
+            tools:layout_editor_absoluteX="183dp"
+            tools:layout_editor_absoluteY="714dp" />
+
+        <ImageView
+            android:id="@+id/button2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/button2"
+            tools:layout_editor_absoluteX="240dp"
+            tools:layout_editor_absoluteY="714dp" />
+
+        <ImageView
+            android:id="@+id/button3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/button3"
+            tools:layout_editor_absoluteX="300dp"
+            tools:layout_editor_absoluteY="714dp" />
+
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/btn_hint"
+        android:layout_width="84dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tableLayout2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        app:srcCompat="@drawable/hint" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/grid_viewDesk"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_back" />
+
+    <ImageView
+        android:id="@+id/btn_settigns"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/settings_icon" />
+
+    <ImageView
+        android:id="@+id/img_time"
+        android:layout_width="75dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toEndOf="@+id/grid_viewDesk"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"
+        app:srcCompat="@drawable/time" />
+
+    <ImageView
+        android:id="@+id/btn_newgame"
+        android:layout_width="106dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/grid_viewDesk"
+        app:srcCompat="@drawable/newgame" />
+
+    <ImageView
+        android:id="@+id/btn_restart"
+        android:layout_width="94dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_newgame"
+        app:layout_constraintStart_toEndOf="@+id/grid_viewDesk"
+        app:srcCompat="@drawable/restart" />
+
+    <com.masterschief.eulersquare.ui.MyChronometr
+        android:id="@+id/chronometer"
+        android:layout_width="88dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="24dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/grid_viewDesk"
+        app:layout_constraintTop_toBottomOf="@+id/img_time" />
+
+    <ImageView
+        android:id="@+id/btn_pause"
+        android:layout_width="36dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toEndOf="@+id/grid_viewDesk"
+        app:layout_constraintTop_toTopOf="@+id/chronometer"
+        app:srcCompat="@drawable/pause" />
+
+    <com.masterschief.eulersquare.ui.SquareLayout
+        android:id="@+id/grid_viewDesk"
+        android:layout_width="325dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="19dp">
+
+        <com.masterschief.eulersquare.ui.Desk
+            android:id="@+id/viewDesk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.masterschief.eulersquare.ui.SquareLayout>
+
+</android.support.constraint.ConstraintLayout>

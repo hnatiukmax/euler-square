@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Text size for Number Picker -->
+    <style name="NumberPickerText">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <!-- Splash screen -->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+
 </resources>

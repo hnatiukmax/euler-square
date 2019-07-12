@@ -3,33 +3,48 @@ package com.masterschief.eulersquare.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.RadioGroup;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.masterschief.eulersquare.BuildConfig;
 import com.masterschief.eulersquare.R;
 import com.masterschief.eulersquare.logic.*;
+import com.masterschief.eulersquare.views.GameView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-    private RadioGroup rdSize;
-    private RadioGroup rdComplexity;
-    private Button btnGo;
+
+    @BindView(R.id.rdComplexity)
+    RadioGroup rdComplexity;
+
+    @BindView(R.id.bntGo)
+    Button btnGo;
+
+    @BindView(R.id.rdSize)
+    NumberPicker rdSize;
+
     private Mode mode;
 
-    private RadioGroup.OnCheckedChangeListener listener_size = (RadioGroup group, int id) -> {
-        switch (id) {
-            case R.id.x3:
+    private NumberPicker.OnValueChangeListener rdSize_listener = (NumberPicker picker, int oldVal, int newVal) -> {
+        switch (newVal) {
+            case 3:
                 mode.size = Size.X3;
                 break;
-            case R.id.x4:
+            case 4:
                 mode.size = Size.X4;
                 break;
-            case R.id.x5:
+            case 5:
                 mode.size = Size.X5;
                 break;
         }
-    };
 
+    };
 
     private RadioGroup.OnCheckedChangeListener listener_level = (RadioGroup group, int id) -> {
         switch (id) {
@@ -45,28 +60,48 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
-    private View.OnClickListener listener_go = (View v) -> {
-        Intent intent = new Intent(this, GameActivity.class);
+    @OnClick(R.id.bntGo)
+    void go_listener() {
+        Intent intent = new Intent(this, GameView.class);
         intent.putExtra("mode", mode);
         startActivity(intent);
-    };
+        Animatoo.animateSlideLeft(this);
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mode = new Mode(Size.X3, Level.EASY);
+        if (savedInstanceState != null) {
+            mode = (Mode) savedInstanceState.getSerializable("mode");
+        } else {
+            mode = new Mode(Size.X4, Level.EASY);
+            rdSize.setValue(4);
+        }
 
-        btnGo = findViewById(R.id.go);
-        btnGo.setOnClickListener(listener_go);
+        rdSize.setMinValue(3);
+        rdSize.setMaxValue(5);
 
-        rdSize = findViewById(R.id.rdSize);
-        rdComplexity = findViewById(R.id.rdComplexity);
-
-        rdSize.setOnCheckedChangeListener(listener_size);
         rdComplexity.setOnCheckedChangeListener(listener_level);
+        rdSize.setOnValueChangedListener(rdSize_listener);
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable("mode", mode);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        rdSize.setValue(mode.size.getSize());
     }
 }

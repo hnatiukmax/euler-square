@@ -2,14 +2,14 @@ package com.masterschief.eulersquare.logic;
 
 import android.graphics.Paint;
 
-import com.masterschief.eulersquare.controller.GameController;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
 
-public class LSquare {
-    private Logger log = Logger.getLogger(LSquare.class.getName());
+public class LSquare  {
+    transient private Logger log = Logger.getLogger(LSquare.class.getName());
 
     private int n;
     private Pair[][] eulerSquare;

@@ -4,7 +4,9 @@
     <string name="title_activity_settings">Settings</string>
     <string name="intro">Euler Square</string>
     <string name="first_slide">Греко-латинский квадрат, или эйлеров квадрат, — квадрат N×N в каждой клетке которого стоят 2 числа от 1 до N так, что выполняются следующие условия:</string>
-
+    <string name="second_slide_1">В каждой строке и столбце каждая буква и цифра встречается один раз на первом и втором месте в паре соответственно.</string>
+    <string name="second_slide_2">Пары являются уникальными.</string>
+    <string name="final_side">Вперед!</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

@@ -1,4 +1,4 @@
-package com.masterschief.eulersquare.ui;
+package com.masterschief.eulersquare.intro;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,10 +10,20 @@ import android.view.ViewGroup;
 
 import com.masterschief.eulersquare.R;
 
-public class Frag1 extends Fragment {
+public class SlideItem extends Fragment{
+    private int xmlRes;
+    public static int firstSlide = R.layout.firstslide;
+    public static int mistakesSlide = R.layout.secondslide;
+    public static int finalSlide = R.layout.finalslide;
+
+
+    public void setXmlRes(int xmlRes) {
+        this.xmlRes = xmlRes;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.firstslide, null);
+        return inflater.inflate(xmlRes, null);
     }
 }

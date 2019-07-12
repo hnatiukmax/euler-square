@@ -19,6 +19,9 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import com.masterschief.eulersquare.R;
+import com.masterschief.eulersquare.utils.Preferences;
+
+import java.io.Serializable;
 
 import static android.content.Context.VIBRATOR_SERVICE;
 
@@ -28,15 +31,15 @@ import static android.content.Context.VIBRATOR_SERVICE;
 
 
 public class MediaEffect {
-    private static MediaEffect instance;
-    private boolean statePlayer;
-    private boolean stateVibro;
-
     public static final int click = R.raw.click;
+    public static final int hint = R.raw.hint;
+    public static final int choice = R.raw.choice;
 
     private MediaEffect() {
-        statePlayer = stateVibro = true;
+
     }
+
+    private static MediaEffect instance;
 
     public static MediaEffect getInstance() {
         if (instance == null) {
@@ -45,17 +48,9 @@ public class MediaEffect {
         return instance;
     }
 
-    public boolean setStatePlayer() {
-        return statePlayer;
-    }
-
-    public boolean setStateVibro() {
-        return stateVibro;
-    }
-
     //вибрация
     public void vibro(Context context, int msec) {
-        if (stateVibro) {
+        if (new Preferences(context).getVibro()) {
             if (Build.VERSION.SDK_INT >= 26) {
                 ((Vibrator) context.getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(msec / 3, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
@@ -65,7 +60,7 @@ public class MediaEffect {
     }
 
     public void mPlay(Context context, int res) {
-        if (statePlayer) {
+        if (new Preferences(context).getSound()) {
             try {
                 MediaPlayer mMediaPlayer = MediaPlayer.create(context, res);
                 mMediaPlayer.start();
@@ -77,13 +72,5 @@ public class MediaEffect {
                 e.printStackTrace();
             }
         }
-    }
-
-    //всплывающие сообщения
-    public static void showToast(Context context, String text) {
-        Toast toast;
-        toast = Toast.makeText(context.getApplicationContext(), text, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP, 0 , 25);
-        toast.show();
     }
 }
