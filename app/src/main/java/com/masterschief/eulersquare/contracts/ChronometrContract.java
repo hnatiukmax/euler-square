@@ -12,4 +12,6 @@ public interface ChronometrContract {
     public String getTime();
 
     public void setWin();
+
+    public void onStop();
 }

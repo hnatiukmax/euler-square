@@ -50,8 +50,8 @@ public class MyChronometr extends Chronometer implements ChronometrContract {
 
     @Override
     public void onPause() {
-        lastPause = SystemClock.elapsedRealtime();
-        this.stop();
+            lastPause = SystemClock.elapsedRealtime();
+            this.stop();
     }
 
     @Override
@@ -68,6 +68,11 @@ public class MyChronometr extends Chronometer implements ChronometrContract {
     @Override
     public void setWin() {
         this.setBase(getBase() - (getBase() - SystemClock.elapsedRealtime()) );
+        this.stop();
+    }
+
+    @Override
+    public void onStop() {
         this.stop();
     }
 }

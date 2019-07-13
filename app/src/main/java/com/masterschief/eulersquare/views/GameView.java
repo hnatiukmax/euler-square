@@ -63,7 +63,6 @@ public class GameView extends AppCompatActivity implements GameContract.GameView
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         setContentView(R.layout.activity_game);
 
         mode = (Mode) getIntent().getSerializableExtra("mode");
@@ -72,7 +71,19 @@ public class GameView extends AppCompatActivity implements GameContract.GameView
         attachPresenter();
 
         chronometer.onStart();
+        if (savedInstanceState != null) {
+            Utils.log("base is " + savedInstanceState.getLong("time"));
+            chronometer.onHint( - 1 * savedInstanceState.getLong("time"));
+        }
 
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        gameDesk.setPause();
+        chronometer.onPause();
     }
 
     private void initUI() {
@@ -97,7 +108,7 @@ public class GameView extends AppCompatActivity implements GameContract.GameView
         btnRestart = findViewById(R.id.btn_restart);
         btnNewGame = findViewById(R.id.btn_newgame);
         btnPause = findViewById(R.id.btn_pause);
-        chronometer = findViewById(R.id.chronometer);
+        chronometer = (ChronometrContract) findViewById(R.id.chronometer);
 
         btnHint.setOnClickListener(this);
         btnBack.setOnClickListener(this);
@@ -146,6 +157,12 @@ public class GameView extends AppCompatActivity implements GameContract.GameView
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return presenter;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putLong("time", chronometer.getBase() - SystemClock.elapsedRealtime());
     }
 
     //onClick method implementation
@@ -253,8 +270,6 @@ public class GameView extends AppCompatActivity implements GameContract.GameView
     public void setWinDeskState() {
         chronometer.onHint(hintInSecond);
         gameDesk.setWin(chronometer.getTime());
-        //chronometer.onHint(chronometer.getBase() - SystemClock.elapsedRealtime());
-        //chronometer.onPause();
         chronometer.setWin();
     }
 
